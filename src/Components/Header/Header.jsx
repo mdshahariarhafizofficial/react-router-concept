@@ -10,7 +10,9 @@ const Header = () => {
                 <NavLink to='/app'>App</NavLink>
                 <NavLink to='/about'>About</NavLink>
                 <NavLink to='/contact'>Contact</NavLink>
-                {/* <NavLink to='/'></NavLink> */}
+                <NavLink to='/blogs'>Blogs</NavLink>
+                <NavLink to='/users'>Users</NavLink>
+                <NavLink to='/todos'>Todos</NavLink>
            </nav>
         </div>
     );

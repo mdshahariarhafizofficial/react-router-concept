@@ -1,4 +1,4 @@
-import { StrictMode } from 'react'
+import { StrictMode, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
@@ -7,6 +7,12 @@ import Root from './Components/Root/Root.jsx'
 import Mobile from './Components/Mobile/Mobile.jsx'
 import About from './Components/About/About.jsx'
 import Contact from './Components/Contact/Contact.jsx'
+import Blogs from './Components/Blogs/Blogs.jsx'
+import Users from './Components/Users/Users.jsx'
+import Todos from './Components/Todos/Todos.jsx'
+
+const todosFetch = fetch('https://jsonplaceholder.typicode.com/todos')
+  .then(res => res.json())
 
 const router = createBrowserRouter([
   {path: '/', Component: Root,
@@ -14,7 +20,18 @@ const router = createBrowserRouter([
       { index: true, Component: Mobile },
       { path: 'about', Component: About},
       { path: 'contact', Component: Contact},
-      { path: 'app', Component: App }
+      { path: 'app', Component: App },
+      { path: 'blogs', Component: Blogs},
+      { path: 'users',
+        loader: ()=> fetch('https://jsonplaceholder.typicode.com/users'),
+        Component: Users 
+      },
+      {
+        path: 'todos',
+        element: <Suspense fallback={<h3>Loading....</h3>}>
+          <Todos todosFetch = {todosFetch}></Todos>
+        </Suspense>
+      }
     ]
   }
 ])
