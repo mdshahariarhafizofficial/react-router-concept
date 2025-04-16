@@ -10,6 +10,10 @@ import Contact from './Components/Contact/Contact.jsx'
 import Blogs from './Components/Blogs/Blogs.jsx'
 import Users from './Components/Users/Users.jsx'
 import Todos from './Components/Todos/Todos.jsx'
+import Posts from './Components/Posts/Posts.jsx'
+import PostDetails from './Components/Post Details/PostDetails.jsx'
+import Comments from './Components/Comments/Comments.jsx'
+import CommentsDetails from './Components/Comments/CommentsDetails.jsx'
 
 const todosFetch = fetch('https://jsonplaceholder.typicode.com/todos')
   .then(res => res.json())
@@ -31,7 +35,28 @@ const router = createBrowserRouter([
         element: <Suspense fallback={<h3>Loading....</h3>}>
           <Todos todosFetch = {todosFetch}></Todos>
         </Suspense>
-      }
+      },
+      {
+        path: 'posts',
+        loader: ()=>fetch('https://jsonplaceholder.typicode.com/posts'),
+        Component: Posts
+      },
+      {
+        path: 'posts/:postId',
+        loader: ({params})=> fetch(`https://jsonplaceholder.typicode.com/posts/${params.postId}`),
+        
+        Component: PostDetails
+      },
+      {
+        path: 'comments',
+        loader: ()=> fetch('https://jsonplaceholder.typicode.com/comments'),
+        Component: Comments
+      },
+      {
+        path: 'Comments/:commentId',
+        loader: ({params})=> fetch(`https://jsonplaceholder.typicode.com/comments/${params.commentId}`),
+        Component: CommentsDetails
+      },
     ]
   }
 ])

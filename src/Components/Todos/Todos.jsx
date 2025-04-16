@@ -2,7 +2,6 @@ import React, { use } from 'react';
 
 const Todos = ({todosFetch}) => {
     const todosData = use(todosFetch);
-    console.log(todosData);
     
     return (
         <div>
